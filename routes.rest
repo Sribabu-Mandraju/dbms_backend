@@ -1,0 +1,26 @@
+###
+post http://localhost:3000/api/students/register
+Content-Type: application/json
+
+{
+  "studentName": "John Doe",
+  "studentEmail": "johndoe@example.com",
+  "studentId": "123456",
+  "studentRollNumber": "2023A001",
+  "externalSetNumber": 5,
+  "internalSetNumber": 3,
+  "vivaSetNumbersArray": [2, 4, 6, 8]
+}
+
+###
+
+post http://localhost:3000/api/students/login
+Content-Type: application/json
+
+{
+  "studentId": "N210522",
+  "studentEmail": "n210522@rguktn.ac.in",
+  "studentRollNumber": "33"
+}
+
+
