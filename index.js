@@ -16,11 +16,15 @@ const server = http.createServer(app);
 
 // Middleware setup
 app.use(express.json());
+
+// CORS setup: Allow requests from any origin
 app.use(cors({
-    origin: 'http://localhost:5173',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true
+    origin: '*',  // Allow all origins
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allow specific HTTP methods
+    allowedHeaders: 'Content-Type, Authorization', // Allow specific headers
+    credentials: true,  // Allow cookies or authorization headers
 }));
+
 app.use(bodyParser.json());
 
 // MongoDB connection
