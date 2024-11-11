@@ -1,11 +1,11 @@
 ###
-post http://localhost:3000/api/students/register
+post https://dbms-backend-g8wg.onrender.com/api/students/register
 Content-Type: application/json
 
 {
   "studentName": "Sribabu MMMM",
-  "studentEmail": "n210501@rguktn.ac.in",
-  "studentId": "N210501",
+  "studentEmail": "n210ss501@rguktn.ac.in",
+  "studentId": "N210ss501",
   "studentRollNumber": "1",
   "externalSetNumber": 5,
   "internalSetNumber": 3,
