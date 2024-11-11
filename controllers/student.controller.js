@@ -1,12 +1,14 @@
 import Student from '../models/student.modal.js';
+import VivaQuestionResponse from '../models/viva.modals.js';
 
+// Registration function
 // Registration function
 export const register = async (req, res) => {
   const { studentName, studentEmail, studentId, studentRollNumber, externalSetNumber, internalSetNumber, vivaSetNumbersArray } = req.body;
 
   // Validate the input data
-  if (!studentName || !studentEmail || !studentId || !studentRollNumber || externalSetNumber === undefined || internalSetNumber === undefined || !Array.isArray(vivaSetNumbersArray)) {
-    return res.status(400).json({ error: "All fields are required" });
+  if (!studentName || !studentEmail || !studentId || !studentRollNumber || externalSetNumber === undefined || internalSetNumber === undefined || !Array.isArray(vivaSetNumbersArray) || vivaSetNumbersArray.length !== 10) {
+    return res.status(400).json({ error: "All fields are required and vivaSetNumbersArray should have exactly 10 numbers" });
   }
 
   try {
@@ -47,7 +49,7 @@ export const register = async (req, res) => {
         studentRollNumber: newStudent.studentRollNumber,
         externalSetNumber: newStudent.externalSetNumber,
         internalSetNumber: newStudent.internalSetNumber,
-        vivaSetNumbersArray: newStudent.vivaSetNumbersArray,
+        vivaSetNumbersArray: newStudent.vivaSetNumbersArray, // Include vivaSetNumbersArray
       },
     });
   } catch (error) {
@@ -55,6 +57,7 @@ export const register = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 // Login function (for returning users)
 export const login = async (req, res) => {
@@ -84,11 +87,73 @@ export const login = async (req, res) => {
         studentRollNumber: student.studentRollNumber,
         externalSetNumber: student.externalSetNumber,
         internalSetNumber: student.internalSetNumber,
-        vivaSetNumbersArray: student.vivaSetNumbersArray,
+        vivaSetNumbersArray: student.vivaSetNumbersArray, // Include vivaSetNumbersArray
       },
     });
   } catch (error) {
     console.error("Login error:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+export const createOrUpdateVivaResponse = async (req, res) => {
+  const { studentId, vivaResponse } = req.body;
+
+  // Validate the input data
+  if (!studentId || !Array.isArray(vivaResponse)) {
+    return res.status(400).json({ error: "Student ID and vivaResponse array are required" });
+  }
+
+  try {
+    // Check if the student already has a viva response record
+    const existingResponse = await VivaQuestionResponse.findOne({ studentId });
+
+    // If the student already has a record, update it
+    if (existingResponse) {
+      existingResponse.vivaResponse = vivaResponse;
+      await existingResponse.save();
+      return res.status(200).json({
+        message: "Viva responses updated successfully",
+        vivaResponse: existingResponse,
+      });
+    } else {
+      // Otherwise, create a new viva response record for the student
+      const newVivaResponse = new VivaQuestionResponse({
+        studentId,
+        vivaResponse,
+      });
+      await newVivaResponse.save();
+      return res.status(201).json({
+        message: "Viva responses created successfully",
+        vivaResponse: newVivaResponse,
+      });
+    }
+  } catch (error) {
+    console.error("Viva Response error:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Route to get viva responses for a specific student
+export const getVivaResponses = async (req, res) => {
+  const { studentId } = req.params;
+
+  try {
+    // Find the viva responses by studentId
+    const vivaResponse = await VivaQuestionResponse.findOne({ studentId });
+
+    if (!vivaResponse) {
+      return res.status(404).json({ error: "Viva responses not found for this student" });
+    }
+
+    // Return the student's viva responses
+    return res.status(200).json({
+      message: "Viva responses fetched successfully",
+      vivaResponse,
+    });
+  } catch (error) {
+    console.error("Viva Response fetch error:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
