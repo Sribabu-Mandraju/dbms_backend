@@ -3,10 +3,10 @@ post http://localhost:3000/api/students/register
 Content-Type: application/json
 
 {
-  "studentName": "John Doe",
-  "studentEmail": "johndoe@example.com",
-  "studentId": "123456",
-  "studentRollNumber": "2023A001",
+  "studentName": "Sribabu ",
+  "studentEmail": "n210522@rguktn.ac.in",
+  "studentId": "N210522",
+  "studentRollNumber": "33",
   "externalSetNumber": 5,
   "internalSetNumber": 3,
   "vivaSetNumbersArray": [2, 4, 6, 8]

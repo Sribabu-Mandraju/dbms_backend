@@ -41,6 +41,6 @@ const studentSchema = new mongoose.Schema(
 );
 
 // Create and export the model based on the schema
-const Student = mongoose.model("Student", studentSchema);
+const Student = mongoose.model("CSE6", studentSchema);
 
 export default Student;
