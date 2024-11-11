@@ -7,5 +7,5 @@ const router = express.Router();
 router.post("/register",register)
 router.post("/login",login)
 router.post("/submit-viva",createOrUpdateVivaResponse)
-router.get("/response/:studentId")
+router.get("/response/:studentId",getVivaResponses)
 export default router

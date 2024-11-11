@@ -24,7 +24,11 @@ Content-Type: application/json
 
 
 ###
-post https://dbms-backend-g8wg.onrender.com/api/students/submit-vava
+post https://dbms-backend-g8wg.onrender.com/api/students/login
+Content-Type: application/json
+
+###
+GET http://localhost:3000/api/students/response/N210522
 Content-Type: application/json
 
 
