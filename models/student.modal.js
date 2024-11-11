@@ -22,7 +22,6 @@ const studentSchema = new mongoose.Schema(
     studentRollNumber: {
       type: String,
       required: true,
-      unique: true, // Ensures each roll number is unique
     },
     externalSetNumber: {
       type: Number,
@@ -35,6 +34,10 @@ const studentSchema = new mongoose.Schema(
     vivasetNumbersArray: {
       type: [Number], // Array of numbers
       required: true,
+    },
+    className: {  // New field added
+      type: String,
+      required: true,  // You can set this as required or not, depending on your needs
     },
   },
   { timestamps: true } // Automatically adds createdAt and updatedAt fields

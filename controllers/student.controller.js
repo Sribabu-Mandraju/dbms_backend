@@ -2,30 +2,28 @@ import Student from '../models/student.modal.js';
 import VivaQuestionResponse from '../models/viva.modals.js';
 
 // Registration function
-// Registration function
 export const register = async (req, res) => {
-  const { studentName, studentEmail, studentId, studentRollNumber, externalSetNumber, internalSetNumber, vivaSetNumbersArray } = req.body;
+  const { studentName, studentEmail, studentId, studentRollNumber, externalSetNumber, internalSetNumber, vivaSetNumbersArray, className } = req.body;
 
   // Validate the input data
-  if (!studentName || !studentEmail || !studentId || !studentRollNumber || externalSetNumber === undefined || internalSetNumber === undefined || !Array.isArray(vivaSetNumbersArray) || vivaSetNumbersArray.length !== 10) {
-    return res.status(400).json({ error: "All fields are required and vivaSetNumbersArray should have exactly 10 numbers" });
+  if (!studentName || !studentEmail || !studentId || !studentRollNumber || externalSetNumber === undefined || internalSetNumber === undefined || !Array.isArray(vivaSetNumbersArray) || vivaSetNumbersArray.length !== 10 || !className) {
+    return res.status(400).json({ error: "All fields are required, vivaSetNumbersArray should have exactly 10 numbers, and className is required" });
   }
 
   try {
     // Check if a student with this email, ID, or roll number already exists
-    const existingStudent = await Student.findOne({ 
+    const existingStudent = await Student.findOne({
       $or: [
-        { studentEmail }, 
-        { studentId }, 
-        { studentRollNumber }
-      ] 
+        { studentEmail },
+        { studentId }
+      ]
     });
 
     if (existingStudent) {
       return res.status(409).json({ error: "Student with this email, ID, or roll number already exists" });
     }
 
-    // Create a new student
+    // Create a new student with className
     const newStudent = new Student({
       studentName,
       studentEmail,
@@ -34,6 +32,7 @@ export const register = async (req, res) => {
       externalSetNumber,
       internalSetNumber,
       vivaSetNumbersArray,
+      className, // Include className
     });
 
     // Save the new student to the database
@@ -49,7 +48,8 @@ export const register = async (req, res) => {
         studentRollNumber: newStudent.studentRollNumber,
         externalSetNumber: newStudent.externalSetNumber,
         internalSetNumber: newStudent.internalSetNumber,
-        vivaSetNumbersArray: newStudent.vivaSetNumbersArray, // Include vivaSetNumbersArray
+        vivaSetNumbersArray: newStudent.vivaSetNumbersArray,
+        className: newStudent.className, // Include className in response
       },
     });
   } catch (error) {
@@ -58,26 +58,25 @@ export const register = async (req, res) => {
   }
 };
 
-
 // Login function (for returning users)
 export const login = async (req, res) => {
-  const { studentId, studentEmail, studentRollNumber } = req.body;
+  const { studentId, studentEmail } = req.body;
 
   // Validate the input data
-  if (!studentId || !studentEmail || !studentRollNumber) {
+  if (!studentId || !studentEmail ) {
     return res.status(400).json({ error: "Student ID, email, and roll number are required" });
   }
 
   try {
     // Search for the student by studentId, studentEmail, and studentRollNumber
-    const student = await Student.findOne({ studentId, studentEmail, studentRollNumber });
+    const student = await Student.findOne({ studentId, studentEmail });
 
     // If no student is found
     if (!student) {
       return res.status(404).json({ error: "Student not found" });
     }
 
-    // If student is found, return success message
+    // If student is found, return success message with className
     return res.status(200).json({
       message: "Login successful",
       student: {
@@ -87,7 +86,8 @@ export const login = async (req, res) => {
         studentRollNumber: student.studentRollNumber,
         externalSetNumber: student.externalSetNumber,
         internalSetNumber: student.internalSetNumber,
-        vivaSetNumbersArray: student.vivaSetNumbersArray, // Include vivaSetNumbersArray
+        vivaSetNumbersArray: student.vivaSetNumbersArray,
+        className: student.className, // Include className in response
       },
     });
   } catch (error) {
@@ -96,7 +96,7 @@ export const login = async (req, res) => {
   }
 };
 
-
+// Create or update viva response function
 export const createOrUpdateVivaResponse = async (req, res) => {
   const { studentId, vivaResponse } = req.body;
 
