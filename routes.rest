@@ -3,14 +3,14 @@ post http://localhost:3000/api/students/register
 Content-Type: application/json
 
 {
-  "studentName": "Sribabu s",
-  "studentEmail": "n2ss10ddss501@rguktn.ac.in",
-  "studentId": "N21dd0ssss501",
-  "studentRollNumber": "1",
-  "externalSetNumber": 5,
+  "studentName": "M Nikhila",
+  "studentEmail": "n211092@rguktn.ac.in",
+  "studentId": "N211092",
+  "studentRollNumber": "60",
+  "externalSetNumber": 1,
   "internalSetNumber": 3,
   "vivaSetNumbersArray": [2, 4, 6, 6,7,8,9,5,8,10],
-  "className":"cse-6"
+  "className":"cse-5"
 }
 
 ###
