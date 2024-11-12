@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "studentName": "M Nikhila",
-  "studentEmail": "n211092@rguktn.ac.in",
-  "studentId": "N211092",
+  "studentEmail": "n210022@rguktn.ac.in",
+  "studentId": "n210022",
   "studentRollNumber": "60",
   "externalSetNumber": 1,
   "internalSetNumber": 3,
