@@ -24,6 +24,6 @@ const vivaQuestionResponseSchema = new mongoose.Schema(
 );
 
 // Create and export the model based on the schema
-const VivaQuestionResponse = mongoose.model("VivaQuestionResponse", vivaQuestionResponseSchema);
+const VivaQuestionResponse = mongoose.model("VivaQuestionResponse_12-11", vivaQuestionResponseSchema);
 
 export default VivaQuestionResponse;
