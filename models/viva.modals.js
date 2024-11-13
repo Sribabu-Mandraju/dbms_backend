@@ -19,7 +19,6 @@ const vivaQuestionResponseSchema = new mongoose.Schema(
         },
         answer: {
           type: String,
-          required: true, // Ensures that an answer is provided
         },
       },
     ],

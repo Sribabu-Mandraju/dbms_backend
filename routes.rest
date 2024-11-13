@@ -1,16 +1,16 @@
 ###
-post http://localhost:3000/api/students/register
+post https://dbms-backend-g8wg.onrender.com/api/students/register
 Content-Type: application/json
 
 {
-  "studentName": "M Nikhila",
-  "studentEmail": "n210022@rguktn.ac.in",
-  "studentId": "n210022",
-  "studentRollNumber": "60",
-  "externalSetNumber": 1,
+  "studentName": "Yuvraj",
+  "studentEmail": "n210673@rguktn.ac.in",
+  "studentId": "N210673",
+  "studentRollNumber": "39",
+  "externalSetNumber": 7,
   "internalSetNumber": 3,
   "vivaSetNumbersArray": [2, 4, 6, 6,7,8,9,5,8,10],
-  "className":"cse-5"
+  "className":"cse-6"
 }
 
 ###
@@ -18,9 +18,9 @@ post https://dbms-backend-g8wg.onrender.com/api/students/login
 Content-Type: application/json
 
 {
-  "studentId": "N210522",
-  "studentEmail": "n210522@rguktn.ac.in",
-  "studentRollNumber": "33"
+  "studentId": "N210929",
+  "studentEmail": "n210929@rguktn.ac.in",
+  "studentRollNumber": "52"
 }
 
 
