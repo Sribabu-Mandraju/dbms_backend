@@ -98,10 +98,10 @@ export const login = async (req, res) => {
 
 // Create or update viva response function
 export const createOrUpdateVivaResponse = async (req, res) => {
-  const { studentId, vivaResponse } = req.body;
+  const { studentId, vivaResponse,className } = req.body;
 
   // Validate the input data
-  if (!studentId || !Array.isArray(vivaResponse)) {
+  if (!studentId || !className || !Array.isArray(vivaResponse)) {
     return res.status(400).json({ error: "Student ID and vivaResponse array are required" });
   }
 
@@ -122,6 +122,7 @@ export const createOrUpdateVivaResponse = async (req, res) => {
       const newVivaResponse = new VivaQuestionResponse({
         studentId,
         vivaResponse,
+        className
       });
       await newVivaResponse.save();
       return res.status(201).json({

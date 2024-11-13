@@ -18,8 +18,8 @@ post https://dbms-backend-g8wg.onrender.com/api/students/login
 Content-Type: application/json
 
 {
-  "studentId": "N210522",
-  "studentEmail": "n210522@rguktn.ac.in",
+  "studentId": "N210615",
+  "studentEmail": "n210615@rguktn.ac.in",
   "studentRollNumber": "33"
 }
 

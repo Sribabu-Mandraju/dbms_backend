@@ -7,6 +7,10 @@ const vivaQuestionResponseSchema = new mongoose.Schema(
       type: String, // Student ID as a string (e.g., N210522)
       required: true, // Makes the studentId field required
     },
+    className: {
+      type: String, // Student ID as a string (e.g., N210522)
+      required: true, // Makes the studentId field required
+    },
     vivaResponse: [
       {
         question: {
@@ -24,6 +28,6 @@ const vivaQuestionResponseSchema = new mongoose.Schema(
 );
 
 // Create and export the model based on the schema
-const VivaQuestionResponse = mongoose.model("VivaQuestionResponse_12-11", vivaQuestionResponseSchema);
+const VivaQuestionResponse = mongoose.model("VivaQuestionResponse_13-11", vivaQuestionResponseSchema);
 
 export default VivaQuestionResponse;
